@@ -1,3 +1,8 @@
+const redux = require("redux");
+const {createStore}=require("redux");
+
+const TOGGLE_STATE = "TOGGLE_STATE"
+
 const initialState = {
   profile: {
     gender: "female",
@@ -47,22 +52,57 @@ create an toggle action to toggle the can_chat  flag
 You should be able to turn the flag from true to false to true again etc.
 */
 
+function toggleState(can_chat)
+{
+  return{
+    type: TOGGLE_STATE,
+    payload: {
+      can_chat: can_chat
+    }
+  }
+}
+
 /* 
 Write a reducer to handle the above action
 Make sure to update immutably
 */
 
+
+function reducer(state = initialState, action) {
+	switch (action.type) {
+		case TOGGLE_STATE:
+			return {
+				...state,
+				profile: {
+					...state.profile,
+					relationship_actions: {
+						...state.profile.relationship_actions,
+						can_chat: action.payload.can_chat,
+					},
+				},
+			};
+
+		default:
+			return state;
+	}
+}
+
 /* 
   create a store with the initial data above and the action
 */
 
+
+const store = createStore(reducer);
+
 /* 
   Fire the action
 */
+
+store.dispatch(toggleState(true));
 
 /* 
 expected output: modified nextState
 the store via store.getState() 
 */
 
-console.log(`what is the current chat status?`);
+console.log(store.getState());
