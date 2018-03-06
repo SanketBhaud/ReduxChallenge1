@@ -1,4 +1,7 @@
 const redux = require("redux");
+const {createStore}=require("redux");
+
+const UPDATE_LOCATION = "UPDATE_LOCATION"
 
 const initialState = {
   profile: {
@@ -48,18 +51,43 @@ You can set the new location to:
 Write a reducer to handle the above action
 Make sure to update the location object immutably
 */
+function reducer(state = initialState, action) {
+	switch (action.type) {
+		case UPDATE_LOCATION:
+			return { ...state, profile: { ...state.profile, location: action.payload } };
+		default:
+			return state;
+	}
+}
+
 
 /* 
   create a store with the initial data above and the action
 */
 
+const store = createStore(reducer);
+
 /* 
   Fire the action
 */
+
+function updateLocation() {
+	return {
+		type: UPDATE_LOCATION,
+		payload: {
+			street: 'garage gully juhu ',
+			city: 'mumbai',
+			state: 'maharashtra',
+			postcode: 34345,
+		},
+	};
+}
 
 /* 
 expected output: modified nextState
 the store via store.getState() 
 */
 
-console.log(`Was location changed?`);
+store.dispatch(updateLocation());
+
+console.log(store.getState());
