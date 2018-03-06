@@ -1,0 +1,19 @@
+{
+  "name": "6th-week-redux-sessions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "one": "node src/create-store.js",
+    "two": "node src/upgrade-plan.js",
+    "three": "node src/change-location.js",
+    "four": "node src/add-new-plan.js",
+    "five": "node src/contact-me.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "redux": "^3.7.2"
+  }
+}
